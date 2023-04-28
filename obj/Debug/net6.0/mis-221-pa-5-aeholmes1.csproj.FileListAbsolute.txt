@@ -1,0 +1,15 @@
+C:\Users\aehol\mis221\mis-221-pa-5-aeholmes1\bin\Debug\net6.0\mis-221-pa-5-aeholmes1.exe
+C:\Users\aehol\mis221\mis-221-pa-5-aeholmes1\bin\Debug\net6.0\mis-221-pa-5-aeholmes1.deps.json
+C:\Users\aehol\mis221\mis-221-pa-5-aeholmes1\bin\Debug\net6.0\mis-221-pa-5-aeholmes1.runtimeconfig.json
+C:\Users\aehol\mis221\mis-221-pa-5-aeholmes1\bin\Debug\net6.0\mis-221-pa-5-aeholmes1.dll
+C:\Users\aehol\mis221\mis-221-pa-5-aeholmes1\bin\Debug\net6.0\mis-221-pa-5-aeholmes1.pdb
+C:\Users\aehol\mis221\mis-221-pa-5-aeholmes1\obj\Debug\net6.0\mis-221-pa-5-aeholmes1.csproj.AssemblyReference.cache
+C:\Users\aehol\mis221\mis-221-pa-5-aeholmes1\obj\Debug\net6.0\mis-221-pa-5-aeholmes1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\aehol\mis221\mis-221-pa-5-aeholmes1\obj\Debug\net6.0\mis-221-pa-5-aeholmes1.AssemblyInfoInputs.cache
+C:\Users\aehol\mis221\mis-221-pa-5-aeholmes1\obj\Debug\net6.0\mis-221-pa-5-aeholmes1.AssemblyInfo.cs
+C:\Users\aehol\mis221\mis-221-pa-5-aeholmes1\obj\Debug\net6.0\mis-221-pa-5-aeholmes1.csproj.CoreCompileInputs.cache
+C:\Users\aehol\mis221\mis-221-pa-5-aeholmes1\obj\Debug\net6.0\mis-221-pa-5-aeholmes1.dll
+C:\Users\aehol\mis221\mis-221-pa-5-aeholmes1\obj\Debug\net6.0\refint\mis-221-pa-5-aeholmes1.dll
+C:\Users\aehol\mis221\mis-221-pa-5-aeholmes1\obj\Debug\net6.0\mis-221-pa-5-aeholmes1.pdb
+C:\Users\aehol\mis221\mis-221-pa-5-aeholmes1\obj\Debug\net6.0\mis-221-pa-5-aeholmes1.genruntimeconfig.cache
+C:\Users\aehol\mis221\mis-221-pa-5-aeholmes1\obj\Debug\net6.0\ref\mis-221-pa-5-aeholmes1.dll
