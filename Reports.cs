@@ -20,15 +20,21 @@ namespace mis_221_pa_5_aeholmes1
         }
 
         public void PrintAllTrainers() {
-
+            for(int i = 0; i < Trainer.GetTrainerCount(); i++) {
+                System.Console.WriteLine(trainers[i].ToString());
+            }
         }
 
         public void PrintAllListings() {
-
+            for(int i = 0; i < Listing.GetListingCount(); i++) {
+                System.Console.WriteLine(listings[i].ToString());
+            }
         }
 
         public void PrintAllTrainingSessions() {
-
+            for(int i = 0; i < Transaction.GetBookingCount(); i++) {
+                System.Console.WriteLine(transactions[i].ToString());
+            }
         }
 
 
@@ -39,6 +45,7 @@ namespace mis_221_pa_5_aeholmes1
         // print all training sessions/transactions (like a receipt??)
 
             // binary search is an extra.. not sure where to put it or what function it serves, maybe to sort by date or ID?
+
 
 
 // following report functions should have the option to save to a file (probably create files ahead of time that each thing will save to & writeline telling the user the file name)

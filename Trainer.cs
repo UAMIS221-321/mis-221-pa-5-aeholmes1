@@ -69,7 +69,6 @@ namespace mis_221_pa_5_aeholmes1
             Trainer.trainerCount--;
         }
 
-
        static public void IncMaxTrainerID() {
             Trainer.maxTrainerID++;
         }

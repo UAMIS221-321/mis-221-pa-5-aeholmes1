@@ -4,11 +4,12 @@ namespace mis_221_pa_5_aeholmes1
     {
         private int listingID;
         private string listingTrainerName;
+        private int listingTrainerID;
         private int sessionDate;
         private int sessionHour;
         private int sessionMinute;
         private double sessionCost;
-        private string sessionAvailable; // bool?
+        private bool sessionAvailable;
 
         static private int listingCount;
 
@@ -18,9 +19,10 @@ namespace mis_221_pa_5_aeholmes1
 
         }
 
-        public Listing(int listingID, string listingTrainerName, int sessionDate, int sessionHour, int sessionMinute, double sessionCost, string sessionAvailable, int maxListingID) {
+        public Listing(int listingID, string listingTrainerName, int listingTrainerID, int sessionDate, int sessionHour, int sessionMinute, double sessionCost, bool sessionAvailable, int maxListingID) {
             this.listingID = listingID;
             this.listingTrainerName = listingTrainerName;
+            this.listingTrainerID = listingTrainerID;
             this.sessionDate = sessionDate;
             this.sessionHour = sessionHour;
             this.sessionMinute = sessionMinute;
@@ -42,6 +44,14 @@ namespace mis_221_pa_5_aeholmes1
 
         public string GetListingTrainerName() {
             return listingTrainerName;
+        }
+
+        public void SetListingTrainerID(int listingTrainerID) {
+            this.listingTrainerID = listingTrainerID;
+        }
+
+        public int GetListingTrainerID() {
+            return listingTrainerID;
         }
 
         public void SetSessionDate(int sessionDate) {
@@ -76,11 +86,11 @@ namespace mis_221_pa_5_aeholmes1
             return sessionCost;
         }
 
-         public void SetSessionAvailable(string sessionAvailable) {
+         public void SetSessionAvailable(bool sessionAvailable) {
             this.sessionAvailable = sessionAvailable;
         }
 
-        public string GetSessionAvailable() {
+        public bool GetSessionAvailable() {
             return sessionAvailable;
         }
 
@@ -90,6 +100,10 @@ namespace mis_221_pa_5_aeholmes1
 
         static public void IncListingCount() {
             Listing.listingCount++;
+        }
+
+        static public void DecListingCount() {
+            Listing.listingCount--;
         }
 
         static public int GetListingCount() {
@@ -110,11 +124,11 @@ namespace mis_221_pa_5_aeholmes1
 
         public override string ToString()
         {
-            return ($"Listing ID:   {listingID}\nTrainer Name:  {listingTrainerName}\nSession Date: {sessionDate}\nSession Time:    {sessionHour}:{sessionMinute}\nSession Cost:    ${sessionCost}\nSession Availability:   {sessionAvailable}");
+            return ($"Listing ID:   {listingID}\nTrainer Name:  {listingTrainerName}\nTrainer ID:   {listingTrainerID}\nSession Date: {sessionDate}\nSession Time:    {sessionHour}:{sessionMinute}\nSession Cost:    ${sessionCost}\nSession Availability:   {sessionAvailable}");
         }
 
         public string ToFile() {
-            return($"{listingID}#{listingTrainerName}#{sessionDate}#{sessionHour}#{sessionMinute}#{sessionCost}#{sessionAvailable}");
+            return($"{listingID}#{listingTrainerName}#{listingTrainerID}#{sessionDate}#{sessionHour}#{sessionMinute}#{sessionCost}#{sessionAvailable}");
         }
     }
 }

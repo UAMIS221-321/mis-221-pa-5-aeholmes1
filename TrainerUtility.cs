@@ -2,34 +2,15 @@ namespace mis_221_pa_5_aeholmes1
 {
     public class TrainerUtility
     {
-        private Trainer[] trainers;
 
+        private Trainer[] trainers = new Trainer[500];
+
+        public TrainerUtility() {
+
+        }
         public TrainerUtility(Trainer[] trainers) {
             this.trainers = trainers;
-        }    
-
-        // get all trainers method is probably unnecessary, just using add new trainer works too
-        // add try catch
-
-        // public void GetAllTrainers() {
-        //     Trainer.SetTrainerCount(0);
-        //     System.Console.WriteLine("Please enter the trainer name or stop to stop.");
-        //     string userInput = Console.ReadLine();
-        //     while (userInput.ToUpper() != "STOP") {
-        //         trainers[Trainer.GetTrainerCount()] = new Trainer();
-        //         trainers[Trainer.GetTrainerCount()].SetTrainerName(Console.ReadLine());
-
-        //         System.Console.WriteLine("Please enter the trainer address.");
-        //         trainers[Trainer.GetTrainerCount()].SetTrainerAddress(Console.ReadLine());
-
-        //         System.Console.WriteLine("Please enter the trainer email.");
-        //         trainers[Trainer.GetTrainerCount()].SetTrainerEmail(Console.ReadLine());
-        //         Trainer.IncTrainerCount();
-
-        //         System.Console.WriteLine("Please enter the trainer name or stop to stop.");
-        //         userInput = Console.ReadLine();                
-        //     }
-        // }
+        }
 
         public void GetAllTrainersFromFile() {
             StreamReader inFile = new StreamReader("trainers.txt");
@@ -69,7 +50,6 @@ namespace mis_221_pa_5_aeholmes1
 
         private void Save() {
             StreamWriter outFile = new StreamWriter("trainers.txt");
-
             for (int i = 0; i < Trainer.GetTrainerCount(); i++) {
                 outFile.WriteLine(trainers[i].ToFile());
             }
@@ -83,6 +63,15 @@ namespace mis_221_pa_5_aeholmes1
                 }
             }
             return -1;
+        }
+
+        public Trainer Get(int trainerID) {
+            for (int i = 0; i < Trainer.GetTrainerCount(); i++) {
+                if (trainers[i].GetTrainerID() == trainerID) {
+                    return trainers[i];
+                }
+            }
+            return null;
         }
 
         // add try catch

@@ -1,4 +1,6 @@
-﻿// start main
+﻿using mis_221_pa_5_aeholmes1;
+
+// start main
 
 string menuInput = GetMenuChoice();
 while (menuInput != "5") {
@@ -7,6 +9,8 @@ while (menuInput != "5") {
 }
 
 // end main
+
+// change route method to route to actual functions and not just console writeline
 
 // extra (?): add nice user interface with logo or art or something
 

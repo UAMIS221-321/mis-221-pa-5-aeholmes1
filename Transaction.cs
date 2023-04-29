@@ -5,10 +5,10 @@ namespace mis_221_pa_5_aeholmes1
         private int sessionID;
         private string customerName;
         private string customerEmail;
-        private string trainingDate;
+        private int trainingDate;
         private int bookingTrainerID;
         private string bookingTrainerName;
-        private string bookingStatus; // bool?
+        private string bookingStatus;
 
         static private int bookingCount;
 
@@ -18,7 +18,7 @@ namespace mis_221_pa_5_aeholmes1
 
         }
 
-        public Transaction(int sessionID, string customerName, string customerEmail, string trainingDate, int bookingTrainerID, string bookingTrainerName, string bookingStatus, int maxSessionID) {
+        public Transaction(int sessionID, string customerName, string customerEmail, int trainingDate, int bookingTrainerID, string bookingTrainerName, string bookingStatus, int maxSessionID) {
             this.sessionID = sessionID;
             this.customerName = customerName;
             this.customerEmail = customerEmail;
@@ -52,11 +52,11 @@ namespace mis_221_pa_5_aeholmes1
             return customerEmail;
         }
 
-        public void SetTrainingDate(string trainingDate) {
+        public void SetTrainingDate(int trainingDate) {
             this.trainingDate = trainingDate;
         }
 
-        public string GetTrainingDate() {
+        public int GetTrainingDate() {
             return trainingDate;
         }
 
@@ -100,11 +100,11 @@ namespace mis_221_pa_5_aeholmes1
             Transaction.maxSessionID++;
         }
 
-        static public void SetMaxTrainerID(int maxSessionID) {
+        static public void SetMaxSessionID(int maxSessionID) {
             Transaction.maxSessionID = maxSessionID;
         }
         
-        static public int GetMaxTrainerID() {
+        static public int GetMaxSessionID() {
             return Transaction.maxSessionID;
         }
 
