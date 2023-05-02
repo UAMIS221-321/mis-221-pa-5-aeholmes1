@@ -3,7 +3,8 @@ namespace mis_221_pa_5_aeholmes1
     public class TrainerUtility
     {
 
-        private Trainer[] trainers = new Trainer[500];
+        private Trainer[] trainers;
+        // = new Trainer[500];
 
         public TrainerUtility() {
 
@@ -29,7 +30,7 @@ namespace mis_221_pa_5_aeholmes1
             inFile.Close();
         }
 
-        // add try catch
+        // add try catch (?)
         public void AddTrainer() {
             System.Console.WriteLine("Please enter the trainer name.");
             Trainer myTrainer = new Trainer();
@@ -39,9 +40,12 @@ namespace mis_221_pa_5_aeholmes1
             System.Console.WriteLine("Please enter the trainer email.");
             myTrainer.SetTrainerEmail(Console.ReadLine());
 
+            System.Console.WriteLine($"Trainer ID is: {Trainer.GetMaxTrainerID()}");
             myTrainer.SetTrainerID(Trainer.GetMaxTrainerID());
+            
 
-            trainers[Trainer.GetMaxTrainerID()] = myTrainer;
+            System.Console.WriteLine(Trainer.GetMaxTrainerID());
+            trainers[Trainer.GetTrainerCount()] = myTrainer;
             Trainer.IncMaxTrainerID();
             Trainer.IncTrainerCount();
 
@@ -71,10 +75,11 @@ namespace mis_221_pa_5_aeholmes1
                     return trainers[i];
                 }
             }
-            return null;
+            return new Trainer(-1, "", "", "");
         }
 
-        // add try catch
+        // add try catch (?)
+        // possible extra: add menu to pick what needs to be fixed
         public void UpdateTrainer() {
             System.Console.WriteLine("What's the ID of the trainer you'd like to update?");
             int trainerID = int.Parse(Console.ReadLine());
@@ -104,7 +109,6 @@ namespace mis_221_pa_5_aeholmes1
                 trainers = trainerList.ToArray();
                 Trainer.DecTrainerCount();
                 Save();
-                System.Console.WriteLine("Trainer has been deleted.");
             }
             else {
                 System.Console.WriteLine("Trainer not found.");

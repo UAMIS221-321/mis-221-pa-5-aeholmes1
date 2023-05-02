@@ -2,11 +2,12 @@ namespace mis_221_pa_5_aeholmes1
 {
     public class TransactionUtility
     {
-        private Transaction[] transactions = new Transaction[500];
-        private ListingUtility listingUtility = new ListingUtility();
+        private Transaction[] transactions;
+        private ListingUtility listingUtility;
 
-        public TransactionUtility(Transaction[] transactions) {
+        public TransactionUtility(Transaction[] transactions, ListingUtility listingUtility) {
             this.transactions = transactions;
+            this.listingUtility = listingUtility;
         }
 
         
@@ -16,7 +17,7 @@ namespace mis_221_pa_5_aeholmes1
             System.Console.WriteLine("Please enter the listing ID of the training session you want to book.");
             int searchVal = int.Parse(Console.ReadLine());
             Listing listing = listingUtility.Get(searchVal);
-            if (listing != null) {
+            if (listing.GetListingID() != -1) {
                 Transaction myTransaction = new Transaction();
                 myTransaction.SetSessionID(listing.GetListingID());
                 System.Console.WriteLine("Please enter the customer name.");
@@ -27,20 +28,18 @@ namespace mis_221_pa_5_aeholmes1
                 myTransaction.SetBookingTrainerID(listing.GetListingTrainerID());
                 myTransaction.SetBookingTrainerName(listing.GetListingTrainerName());
                 System.Console.WriteLine("Please enter the booking status as either 'booked', 'completed', or 'cancelled'.");
-                myTransaction.SetBookingStatus(Console.ReadLine());
+                myTransaction.SetBookingStatus(GetBookingStatusFromUser());
 
                 transactions[Transaction.GetBookingCount()] = myTransaction;
                 Transaction.IncMaxSessionID();
                 Transaction.IncBookingCount();
 
                 Save();
+
             }
             else {
                 System.Console.WriteLine("Listing not found.");
-            }
-
-                // add try catches
-            
+            }            
         }
 
         private void Save() {
@@ -61,6 +60,15 @@ namespace mis_221_pa_5_aeholmes1
             return -1;
         }
 
+        public Transaction Get(string customerEmail) {
+            for (int i = 0; i < Transaction.GetBookingCount(); i++) {
+                if (transactions[i].GetCustomerEmail() == customerEmail) {
+                    return transactions[i];
+                }
+            }
+            return new Transaction(-1, "", "", -1, -1, "", "", -1);
+        }
+
 
         public void UpdateStatus() {
             System.Console.WriteLine("Please enter the ID of the training session whose status you'd like to update.");
@@ -68,6 +76,9 @@ namespace mis_221_pa_5_aeholmes1
             int foundIndex = Find(sessionID);
             if (foundIndex != -1) {
                 transactions[foundIndex].SetBookingStatus(GetBookingStatusFromUser());
+            }
+            else {
+                System.Console.WriteLine("Session not found.");
             }
         }
 

@@ -110,7 +110,7 @@ namespace mis_221_pa_5_aeholmes1
 
         public override string ToString()
         {
-            return ($"Session ID:   {sessionID}\nCustomer Name:  {customerName}\nCustomer Email: {customerEmail}\nTraining Date:    {trainingDate}\nTrainer ID:    ${bookingTrainerID}\nTrainer Name:    {bookingTrainerName}\nBooking Status:   {bookingStatus}");
+            return ($"Session ID:   {sessionID}\nCustomer Name:  {customerName}\nCustomer Email: {customerEmail}\nTraining Date:    {trainingDate}\nTrainer ID:    {bookingTrainerID}\nTrainer Name:    {bookingTrainerName}\nBooking Status:   {bookingStatus}");
         }
 
         public string ToFile() {

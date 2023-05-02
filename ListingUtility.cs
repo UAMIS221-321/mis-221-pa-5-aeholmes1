@@ -2,21 +2,22 @@ namespace mis_221_pa_5_aeholmes1
 {
     public class ListingUtility
     {
-        private Listing[] listings = new Listing[500];
+        private Listing[] listings;
 
-        private TrainerUtility trainerUtility = new TrainerUtility();
+        private TrainerUtility trainerUtility;
 
         public ListingUtility() {
 
         }
 
-        public ListingUtility(Listing[] listings) {
+        public ListingUtility(Listing[] listings, TrainerUtility trainerUtility) {
             this.listings = listings;
+            this.trainerUtility = trainerUtility;
         }
 
          public void GetAllListingsFromFile() {
             StreamReader inFile = new StreamReader("listings.txt");
-
+            Listing.SetMaxListingID(0);
             Listing.SetListingCount(0);
             string line = inFile.ReadLine();
             while (!(line == null || line == "")) {
@@ -31,12 +32,12 @@ namespace mis_221_pa_5_aeholmes1
         }
 
 
-        // add try catch
+        // add try catches for date, time, cost
         public void AddListing() {
             System.Console.WriteLine("Please enter the listing trainer ID.");
             int searchVal = int.Parse(Console.ReadLine());
             Trainer trainer = trainerUtility.Get(searchVal);
-            if (trainer != null) {
+            if (trainer.GetTrainerID() != -1) {
                 Listing myListing = new Listing();
                 myListing.SetListingTrainerID(trainer.GetTrainerID());          
                 myListing.SetListingTrainerName(trainer.GetTrainerName());
@@ -50,14 +51,19 @@ namespace mis_221_pa_5_aeholmes1
                 myListing.SetSessionCost(double.Parse(Console.ReadLine()));
                 myListing.SetSessionAvailable(true);
 
+                myListing.SetListingID(Listing.GetMaxListingID());
+
+                // listings[Listing.GetListingCount()] = myListing;     why is this here??
+                // Listing.IncListingCount();
+                
                 listings[Listing.GetListingCount()] = myListing;
+                Listing.IncMaxListingID();
                 Listing.IncListingCount();
 
-                Listing.IncMaxListingID();
-                listings[Listing.GetMaxListingID()] = myListing;
-                Listing.IncListingCount();
+                // listing id is incremented twice?
 
                 Save();
+
 
             }
             else {
@@ -91,10 +97,11 @@ namespace mis_221_pa_5_aeholmes1
                     return listings[i];
                 }
             }
-            return null;
+            return new Listing(-1, "", -1, -1, -1, -1, -1, false, -1);
         }
 
-        // add try catch
+        // add try catch for date, time, cost, availability
+        // possible extra: add menu to pick what needs to be fixed
         public void UpdateListing() {
             System.Console.WriteLine("What's the ID of the listing you'd like to update?");
             int searchVal = int.Parse(Console.ReadLine());
@@ -114,6 +121,7 @@ namespace mis_221_pa_5_aeholmes1
                 listings[foundIndex].SetSessionAvailable(GetAvailabilityFromUser());
 
                 Save();
+
             }
             else {
                 System.Console.WriteLine("Listing not found.");
@@ -138,14 +146,10 @@ namespace mis_221_pa_5_aeholmes1
                 listings = listingList.ToArray();
                 Listing.DecListingCount();
                 Save();
-                System.Console.WriteLine("Listing has been deleted.");
             }
             else {
                 System.Console.WriteLine("Listing not found.");
             }
         }
-
-        // add delete listing method that sets a boolean value for the listing to "deleted" or "false"
-
     }
 }
