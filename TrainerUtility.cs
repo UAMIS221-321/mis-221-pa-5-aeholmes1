@@ -4,7 +4,6 @@ namespace mis_221_pa_5_aeholmes1
     {
 
         private Trainer[] trainers;
-        // = new Trainer[500];
 
         public TrainerUtility() {
 
@@ -30,7 +29,6 @@ namespace mis_221_pa_5_aeholmes1
             inFile.Close();
         }
 
-        // add try catch (?)
         public void AddTrainer() {
             System.Console.WriteLine("Please enter the trainer name.");
             Trainer myTrainer = new Trainer();
@@ -78,8 +76,6 @@ namespace mis_221_pa_5_aeholmes1
             return new Trainer(-1, "", "", "");
         }
 
-        // add try catch (?)
-        // possible extra: add menu to pick what needs to be fixed
         public void UpdateTrainer() {
             System.Console.WriteLine("What's the ID of the trainer you'd like to update?");
             int trainerID = int.Parse(Console.ReadLine());

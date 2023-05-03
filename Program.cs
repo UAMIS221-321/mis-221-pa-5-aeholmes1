@@ -218,7 +218,7 @@ void RouteListingMenu(string listingMenuInput) {
 
 void CustomerBookingData() {
     string bookingMenuInput = GetBookingMenuChoice();
-    while (bookingMenuInput != "4") {
+    while (bookingMenuInput != "5") {
         RouteBookingMenu(bookingMenuInput);
         bookingMenuInput = GetBookingMenuChoice();
     }
@@ -245,12 +245,13 @@ static void DisplayBookingMenu() {
     System.Console.WriteLine("1:     View available sessions");
     System.Console.WriteLine("2:     Book a session");
     System.Console.WriteLine("3:     Update booking status");
-    System.Console.WriteLine("4:     Return to main menu");
+    System.Console.WriteLine("4:     View booked sessions");
+    System.Console.WriteLine("5:     Return to main menu");
 }
 
 static bool ValidBookingMenuChoice(string bookingMenuInput) {
     var userChoice = int.Parse(bookingMenuInput);
-    bool menuTruth = userChoice <= 4 && userChoice >= 1;
+    bool menuTruth = userChoice <= 5 && userChoice >= 1;
     return menuTruth;
 }
 
@@ -270,6 +271,11 @@ void RouteBookingMenu(string bookingMenuInput) {
     else if (userChoice == 3) {
         tranUtility.UpdateStatus();
         System.Console.WriteLine("Session status has been updated. Press any key to return to the menu.");
+        Console.ReadKey();
+    }
+    else if (userChoice == 4) {
+        tranReport.PrintAllTrainingSessions();
+        System.Console.WriteLine("Press any key to return to the menu.");
         Console.ReadKey();
     }
     else {
@@ -315,32 +321,22 @@ static bool ValidReportMenuChoice(string reportMenuInput) {
     return menuTruth;
 }
 
-// make sure to route report functions
-
 void RouteReportMenu(string reportMenuInput) {
-    // Trainer[] trainers = new Trainer[500];
-    // TrainerUtility trainUtility = new TrainerUtility(trainers);
-    // Reports trainReport = new Reports(trainers);
-
-    // Listing[] listings = new Listing[500];
-    // ListingUtility listUtility = new ListingUtility(listings, trainUtility);
-    // Reports listReport = new Reports(listings);
-
-    // Transaction[] transactions = new Transaction[500];
-    // TransactionUtility tranUtility = new TransactionUtility(transactions, listUtility);
-    // Reports tranReport = new Reports(transactions);
-
+    
     var userChoice = int.Parse(reportMenuInput);
     if (userChoice == 1) {
-        System.Console.WriteLine("Pickedd 1");
+        tranReport.IndividualCustomerHistory();
+        System.Console.WriteLine("\nPress any key to return to the menu.");
         Console.ReadKey();
     }
     else if (userChoice == 2) {
-        System.Console.WriteLine("Picked 2");
+        tranReport.AllCustomerHistory();
+        System.Console.WriteLine("\nPress any key to return to the menu.");
         Console.ReadKey();
     }
     else if (userChoice == 3) {
-        System.Console.WriteLine("Picked 3");
+        listReport.RevenueReport();
+        System.Console.WriteLine("\nPress any key to return to the menu.");
         Console.ReadKey();
     }
     else {

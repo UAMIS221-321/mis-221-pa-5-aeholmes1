@@ -13,13 +13,15 @@ namespace mis_221_pa_5_aeholmes1
             this.trainers = trainers;
         }
 
+        public Reports(Transaction[] transactions) {
+            this.transactions = transactions;
+            this.transactionUtility = new TransactionUtility(transactions, null);
+        }
+
         public Reports(Listing[] listings) {
             this.listings = listings;
         }
 
-        public Reports(Transaction[] transactions) {
-            this.transactions = transactions;
-        }
 
         public void PrintAllTrainers() {
             for(int i = 0; i < Trainer.GetTrainerCount(); i++) {
@@ -38,25 +40,14 @@ namespace mis_221_pa_5_aeholmes1
                 System.Console.WriteLine(transactions[i].ToString());
             }
         }
-
-
-            // binary search is an extra.. not sure where to put it or what function it serves, maybe to sort by date or ID?
-
-
-
-// following report functions should have the option to save to a file (probably create files ahead of time that each thing will save to & writeline telling the user the file name)
-
-        // report individual customer sessions/session history (enter an email and see associated session history)
-            // search method for email, or control break report?
-
         
+
 
         public void IndividualCustomerHistory() {
             System.Console.WriteLine("Please enter the email of the customer whose session history you'd like to see.");
-            string searchVal = Console.ReadLine();
+            string searchVal = Console.ReadLine(); 
             Transaction transaction = transactionUtility.Get(searchVal);
             if (transaction.GetCustomerEmail() != "") {
-                // for loop to sort thru list
                 for (int i = 0; i < Transaction.GetBookingCount(); i++) {
                     if (transactions[i].GetCustomerEmail() == searchVal) {
                         System.Console.WriteLine(transactions[i].ToString());
@@ -70,13 +61,14 @@ namespace mis_221_pa_5_aeholmes1
                             outFile.WriteLine(transactions[i].ToFile());
                         }
                     }
+                    System.Console.WriteLine("Data saved to file 'customerhistory.txt'.");
                     outFile.Close();
                 }
             }
         }
 
         static string GetSavingStatusFromUser() {
-            System.Console.WriteLine("Would you like to save this information to a file? Please enter 'yes' or 'no'.");
+            System.Console.WriteLine("Would you like to save this data to a file? Please enter 'yes' or 'no'.");
                 string userInput = Console.ReadLine();
                 while (!ValidSavingChoice(userInput)) {
                     System.Console.WriteLine("Invalid input. Please enter a valid input.");
@@ -95,17 +87,74 @@ namespace mis_221_pa_5_aeholmes1
             return savingTruth;
         }
 
-        static void AllCustomerHistory() {
-            
+        public void AllCustomerHistory() {
+            Sort();
+            for(int i = 0; i < Transaction.GetBookingCount(); i++) {
+                System.Console.WriteLine(transactions[i].ToString());
+            }
+            if (GetSavingStatusFromUser() == "yes") {
+                StreamWriter outFile = new StreamWriter("allcustomerhistory.txt");
+
+                for (int i = 0; i < Transaction.GetBookingCount(); i++) {
+                    outFile.WriteLine(transactions[i].ToFile());
+                }
+                outFile.Close();
+            }
         }
 
-        // list of all sessions from all customers, sorted by customer name and then by date
-            // add total number of sessions for each customer
 
-        // revenue report: list of revenue by month and by year
-            // add cost of each session/transaction, sorted by month and then by year (june, july, august... total for 2021, 2022, 2023...)
-            // this should be similar functionality to listing of sessions per customer
+        public void RevenueReport() {
+            int currentDate = listings[0].GetSessionDate();
+            double revenue = listings[0].GetSessionCost();
+            for (int i = 1; i < Listing.GetListingCount(); i++) {
+                if (listings[i].GetSessionCost() == currentDate) {
+                    revenue += listings[i].GetSessionCost();
+                }
+                else {
+                    ProcessBreak(ref currentDate, ref revenue, listings[i]);
+                }
+            }
+            ProcessBreak(currentDate, revenue);
+            if (GetSavingStatusFromUser() == "yes") {
+                StreamWriter outFile = new StreamWriter("revenuereport.txt");
 
+                for (int i = 0; i < Listing.GetListingCount(); i++) {
+                    outFile.WriteLine(listings[i].ToFile());
+                }
+                outFile.Close();
+            }            
+        }
+
+        public void ProcessBreak(ref int currentDate, ref double revenue, Listing newListing) {
+            System.Console.WriteLine($"Date: {currentDate}    Revenue: ${revenue}");
+            currentDate = newListing.GetSessionDate();
+            revenue = newListing.GetSessionCost();
+        }
+
+        public void ProcessBreak(int currentDate, double revenue) {
+            System.Console.WriteLine($"Date: {currentDate}    Revenue: ${revenue}");
+        }
+
+        public void Sort() {
+            for (int i = 0; i < Transaction.GetBookingCount() - 1; i++) {
+                int min = 1;
+                for (int j = i + 1; j < Transaction.GetBookingCount(); j++) {
+                    if (transactions[i].GetCustomerName().CompareTo(transactions[min].GetCustomerName()) < 0 ||
+                    (transactions[j].GetCustomerName() == transactions[min].GetCustomerName() && transactions[j].GetTrainingDate() < transactions[min].GetTrainingDate())) {
+                        min = j;
+                    }
+                }
+                if (min != 1){
+                    Swap(min, i);
+                }
+            }
+        }
+
+        public void Swap(int x, int y) {
+            Transaction temp = transactions[x];
+            transactions[x] = transactions[y];
+            transactions[y] = temp;
+        }
 
 
 

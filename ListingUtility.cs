@@ -32,7 +32,6 @@ namespace mis_221_pa_5_aeholmes1
         }
 
 
-        // add try catches for date, time, cost
         public void AddListing() {
             System.Console.WriteLine("Please enter the listing trainer ID.");
             int searchVal = int.Parse(Console.ReadLine());
@@ -52,15 +51,10 @@ namespace mis_221_pa_5_aeholmes1
                 myListing.SetSessionAvailable(true);
 
                 myListing.SetListingID(Listing.GetMaxListingID());
-
-                // listings[Listing.GetListingCount()] = myListing;     why is this here??
-                // Listing.IncListingCount();
                 
                 listings[Listing.GetListingCount()] = myListing;
                 Listing.IncMaxListingID();
                 Listing.IncListingCount();
-
-                // listing id is incremented twice?
 
                 Save();
 
@@ -100,8 +94,7 @@ namespace mis_221_pa_5_aeholmes1
             return new Listing(-1, "", -1, -1, -1, -1, -1, false, -1);
         }
 
-        // add try catch for date, time, cost, availability
-        // possible extra: add menu to pick what needs to be fixed
+
         public void UpdateListing() {
             System.Console.WriteLine("What's the ID of the listing you'd like to update?");
             int searchVal = int.Parse(Console.ReadLine());
